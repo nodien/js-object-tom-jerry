@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vn">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    class Rat {
+        constructor(name, weight, speed) {
+            this.name = name;
+            this.weight = weight;
+            this.speed = speed;
+            this.isAlive = true;
+        }
+
+        scream() {
+            if (this.isAlive) {
+                document.write(`${this.name} kêu: chít chít!<br>`);
+            } else {
+                document.write(`${this.name} đã chết...<br>`);
+            }
+        }
+    }
+    class Cat {
+        constructor(name, weight, maxSpeed) {
+            this.name = name;
+            this.weight = weight;
+            this.maxSpeed = maxSpeed;
+        }
+
+        scream() {
+            document.write(`${this.name} kêu: meo meo!<br>`);
+        }
+
+        catch(rat) {
+            if (rat instanceof Rat) {
+                if (rat.isAlive && this.maxSpeed > rat.speed) {
+                    document.write(`${this.name} đã bắt được ${rat.name}.<br>`);
+                    return true;
+                } else {
+                    document.write(`${this.name} không thể bắt được ${rat.name}.<br>`);
+                    return false;
+                }
+            }
+        }
+
+        eat(rat) {
+            if (rat instanceof Rat) {
+                if (rat.isAlive) {
+                    this.weight += rat.weight;
+                    rat.isAlive = false;
+                    document.write(`${this.name} đã ăn ${rat.name} và tăng cân lên ${this.weight}.<br>`);
+                } else {
+                    document.write(`${rat.name} đã chết rồi, không thể ăn nữa!<br>`);
+                }
+            }
+        }
+    }
+    let jerry = new Rat("Jerry", 2, 10);
+    let tom = new Cat("Tom", 5, 15);
+
+    jerry.scream();
+    tom.scream();
+
+    if (tom.catch(jerry)) {
+        tom.eat(jerry);
+    }
+
+    jerry.scream();
+
+</script>
+</html>
